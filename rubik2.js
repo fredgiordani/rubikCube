@@ -183,6 +183,8 @@ document.querySelector('#shuffle').addEventListener('click', () => {
 
 
 function rotateTopLayerRight90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 1 );
 
@@ -222,9 +224,12 @@ function rotateTopLayerRight90() {
   }
 
   animateRotation();
+});
 }
 
 function rotateMiddleLayerRight90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 0 );
 
@@ -264,9 +269,12 @@ function rotateMiddleLayerRight90() {
   }
 
   animateRotation();
+})
 }
 
 function rotateDownLayerRight90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == -1 );
 
@@ -306,9 +314,12 @@ function rotateDownLayerRight90() {
   }
 
   animateRotation();
+})
 }
 
 function rotateTopLayerLeft90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 1 );
 
@@ -349,10 +360,13 @@ function rotateTopLayerLeft90() {
   }
 
   animateRotation();
+})
 }
 
 
 function rotateMiddleLayerLeft90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 0 );
 
@@ -393,8 +407,12 @@ function rotateMiddleLayerLeft90() {
   }
 
   animateRotation();
+})
 }
+
 function rotateDownLayerLeft90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == -1 );
 
@@ -435,9 +453,12 @@ function rotateDownLayerLeft90() {
   }
 
   animateRotation();
+})
 }
 
 function rotateXLeftcolumnUp90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == -1 );
 
@@ -480,9 +501,12 @@ function rotateXLeftcolumnUp90() {
   }
 
   animateRotation();
+})
 }
 
 function rotateXMiddlecolumnUp90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 0 );
 
@@ -525,8 +549,11 @@ function rotateXMiddlecolumnUp90() {
   }
 
   animateRotation();
+})
 }
 function rotateXRightcolumnUp90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 1 );
 
@@ -569,9 +596,12 @@ function rotateXRightcolumnUp90() {
   }
 
   animateRotation();
+})
 }
 
 function rotateXLeftcolumnDown90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == -1 );
 
@@ -614,9 +644,12 @@ function rotateXLeftcolumnDown90() {
   }
 
   animateRotation();
+})
 }
 
 function rotateXMiddlecolumnDown90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 0 );
 
@@ -659,8 +692,11 @@ function rotateXMiddlecolumnDown90() {
   }
 
   animateRotation();
+})
 }
 function rotateXRightcolumnDown90() {
+    return new Promise(resolve => {
+
   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 1 );
 
@@ -703,10 +739,13 @@ function rotateXRightcolumnDown90() {
   }
 
   animateRotation();
+})
 }
 
 
 function rotateZFrontColumnRight90(){
+    return new Promise(resolve => {
+
  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 1 );
 
@@ -749,11 +788,14 @@ function rotateZFrontColumnRight90(){
   }
 
   animateRotation();
+})
 
 };
 
 
 function  rotateZMiddleColumnRight90(){
+    return new Promise(resolve => {
+
  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 0 );
 
@@ -796,11 +838,14 @@ function  rotateZMiddleColumnRight90(){
   }
 
   animateRotation();
+})
 };
 
 
 
 function  rotateZBackColumnRight90(){
+    return new Promise(resolve => {
+
    // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == -1 );
 
@@ -843,12 +888,15 @@ function  rotateZBackColumnRight90(){
   }
 
   animateRotation();
+})
 
 };
 
 
 
 function  rotateZFrontColumnLeft90(){
+    return new Promise(resolve => {
+
  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 1 );
 
@@ -891,10 +939,13 @@ function  rotateZFrontColumnLeft90(){
   }
 
   animateRotation();
+})
 };
 
 
 function  rotateZMiddleColumnLeft90(){
+    return new Promise(resolve => {
+
  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 0 );
 
@@ -937,11 +988,14 @@ function  rotateZMiddleColumnLeft90(){
   }
 
   animateRotation();
+})
 };
 
 
 
 function  rotateZBackColumnLeft90(){
+    return new Promise(resolve => {
+
  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
   const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == -1 );
 
@@ -984,6 +1038,7 @@ function  rotateZBackColumnLeft90(){
   }
 
   animateRotation();
+})
 };
 
 
@@ -1010,7 +1065,7 @@ const shuffles=[
 
  
 function randomSchuffle(){
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 25; i++) {
     setTimeout(() => {
       console.log("Shuffle", i);
       let index = Math.floor(Math.random() * shuffles.length);
