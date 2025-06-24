@@ -1,13 +1,37 @@
 const canvas = document.querySelector('#canvas');
 const renderer =  new THREE.WebGLRenderer({antialias: true, canvas});
 
+const red     = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const orange  = new THREE.MeshBasicMaterial({ color: 0xff8000 });
+const white   = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const yellow  = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+const green   = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const blue    = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+
+
+const materials = [
+  red,    // +X (right)
+  orange, // -X (left)
+  white,  // +Y (up)
+  yellow, // -Y (down)
+  green,  // +Z (front)
+  blue    // -Z (back)
+];
+
 const fov = 75;
 const aspect = 2;  // valeur par défaut du canevas
 const near = 0.1;
 const far = 5;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // optionnel : mouvement fluide
+controls.dampingFactor = 0.1;  // plus ou moins d'inertie
+
 camera.position.z = 4;
+
+
 
 
 const scene = new THREE.Scene();
@@ -23,9 +47,9 @@ const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
 
 
-function makeInstance(geometry, color, x, y, z) {
-  const material = new THREE.MeshPhongMaterial({ color });
-  const cube = new THREE.Mesh(geometry, material);
+function makeInstance(geometry, x, y, z) {
+  // const material = new THREE.MeshPhongMaterial({ color });
+  const cube = new THREE.Mesh(geometry, materials);
   cube.position.set(x, y, z);
   rubiksCube.add(cube); // AU LIEU DE scene.add(...)
   return cube;
@@ -39,44 +63,38 @@ let posZ= [-1,0,1];
 
 cubes= [];
 
-posX.forEach(elementX => {
-    posY.forEach(elementY => {
-        posZ.forEach(elementZ => {
-            let cube = [elementX,elementY,elementZ]
-            cubes.push(cube);
+const cubesMap = {};
+
+posX.forEach(x => {
+    posY.forEach(y => {
+        posZ.forEach(z => {
+            const spacing = 1.01;
+            const cube = makeInstance(geometry,  x * spacing ,y * spacing,z * spacing);
+            cube.userData.pos = { x, y, z };
+            const key = `${x},${y},${z}`;
+            cubesMap[key] = cube;
         })
     });    
 });
 
-console.log("cubes : ",cubes);
-
-console.log( cubes.length)
-
-const instancesXYZ = [];
-
-cubes.forEach(cube => {
-
-    let cubeX= cube[0];
-    let cubeY= cube[1];
-    let cubeZ= cube[2];
-    const spacing = 1.1;
-    instancesXYZ.push(makeInstance(geometry, 0x44aa88,  cubeX * spacing ,cubeY * spacing,cubeZ * spacing));
-});
 
 
+
+console.log("cubes : ",cubesMap);
 
 function render(time) {
   time *= 0.001;  // convertit le temps en secondes
 
-  // Rotation globale du Rubik's Cube
-  rubiksCube.rotation.x = time * 0.3;
-  rubiksCube.rotation.y = time * 0.5;
+   controls.update(); // ← essentiel pour le mouvement fluide
 
   renderer.render(scene, camera);
   requestAnimationFrame(render);
 }
 
 requestAnimationFrame(render);
+
+
+
 
 {
   const color = 0xFFFFFF;
