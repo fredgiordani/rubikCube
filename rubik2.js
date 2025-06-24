@@ -103,3 +103,926 @@ requestAnimationFrame(render);
   light.position.set(-1, 2, 4);
   scene.add(light);
 }
+
+document.querySelector('#rotateTopRight').addEventListener('click', () => {
+  rotateTopLayerRight90();
+});
+
+document.querySelector('#rotateMiddleRight').addEventListener('click', () => {
+  rotateMiddleLayerRight90();
+});
+
+document.querySelector('#rotateDownRight').addEventListener('click', () => {
+  rotateDownLayerRight90();
+});
+
+document.querySelector('#rotateTopLeft').addEventListener('click', () => {
+  rotateTopLayerLeft90();
+});
+
+document.querySelector('#rotateMiddleLeft').addEventListener('click', () => {
+  rotateMiddleLayerLeft90();
+});
+
+document.querySelector('#rotateDownLeft').addEventListener('click', () => {
+  rotateDownLayerLeft90();
+});
+
+document.querySelector('#rotateXLeftColumnUp').addEventListener('click', () => {
+  rotateXLeftcolumnUp90();
+});
+
+document.querySelector('#rotateXMiddleColumnUp').addEventListener('click', () => {
+  rotateXMiddlecolumnUp90();
+});
+
+document.querySelector('#rotateXRightColumnUp').addEventListener('click', () => {
+  rotateXRightcolumnUp90();
+});
+
+document.querySelector('#rotateXLeftColumnDown').addEventListener('click', () => {
+  rotateXLeftcolumnDown90();
+});
+
+document.querySelector('#rotateXMiddleColumnDown').addEventListener('click', () => {
+  rotateXMiddlecolumnDown90();
+});
+
+document.querySelector('#rotateXRightColumnDown').addEventListener('click', () => {
+  rotateXRightcolumnDown90();
+});
+
+document.querySelector('#rotateZFrontColumnRight').addEventListener('click', () => {
+  rotateZFrontColumnRight90();
+});
+
+document.querySelector('#rotateZMiddleColumnRight').addEventListener('click', () => {
+  rotateZMiddleColumnRight90();
+});
+
+document.querySelector('#rotateZBackColumnRight').addEventListener('click', () => {
+  rotateZBackColumnRight90();
+});
+
+document.querySelector('#rotateZFrontColumnLeft').addEventListener('click', () => {
+  rotateZFrontColumnLeft90();
+});
+
+document.querySelector('#rotateZMiddleColumnLeft').addEventListener('click', () => {
+  rotateZMiddleColumnLeft90();
+});
+
+document.querySelector('#rotateZBackColumnLeft').addEventListener('click', () => {
+  rotateZBackColumnLeft90();
+});
+
+document.querySelector('#shuffle').addEventListener('click', () => {
+  randomSchuffle();
+});
+
+
+
+function rotateTopLayerRight90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 1 );
+
+  
+  const group = new THREE.Group();
+  topLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (angle < target) {
+      const delta = Math.min(speed, target - angle);
+      group.rotation.y += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      topLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+function rotateMiddleLayerRight90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 0 );
+
+  
+  const group = new THREE.Group();
+  topLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (angle < target) {
+      const delta = Math.min(speed, target - angle);
+      group.rotation.y += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      topLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+function rotateDownLayerRight90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == -1 );
+
+  
+  const group = new THREE.Group();
+  topLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (angle < target) {
+      const delta = Math.min(speed, target - angle);
+      group.rotation.y += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      topLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+function rotateTopLayerLeft90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 1 );
+
+  console.log("imdgmiufg");
+  
+  const group = new THREE.Group();
+  topLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      group.rotation.y += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      topLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+
+function rotateMiddleLayerLeft90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == 0 );
+
+  console.log("imdgmiufg");
+  
+  const group = new THREE.Group();
+  topLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      group.rotation.y += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      topLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+function rotateDownLayerLeft90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const topLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.y == -1 );
+
+  console.log("imdgmiufg");
+  
+  const group = new THREE.Group();
+  topLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      group.rotation.y += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      topLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+function rotateXLeftcolumnUp90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == -1 );
+
+  
+  const group = new THREE.Group();
+  xLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  // const target = Math.PI / 2;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      // const delta = Math.min(speed, target - angle);
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.x += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      xLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+function rotateXMiddlecolumnUp90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 0 );
+
+  
+  const group = new THREE.Group();
+  xLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  // const target = Math.PI / 2;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      // const delta = Math.min(speed, target - angle);
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.x += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      xLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+function rotateXRightcolumnUp90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 1 );
+
+  
+  const group = new THREE.Group();
+  xLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  // const target = Math.PI / 2;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      // const delta = Math.min(speed, target - angle);
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.x += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      xLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+function rotateXLeftcolumnDown90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == -1 );
+
+  
+  const group = new THREE.Group();
+  xLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  // const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.min(speed, target - angle);
+      // const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.x += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      xLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+function rotateXMiddlecolumnDown90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 0 );
+
+  
+  const group = new THREE.Group();
+  xLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  // const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.min(speed, target - angle);
+      // const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.x += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      xLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+function rotateXRightcolumnDown90() {
+  // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const xLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.x == 1 );
+
+  
+  const group = new THREE.Group();
+  xLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  // const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.min(speed, target - angle);
+      // const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.x += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      xLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+}
+
+
+function rotateZFrontColumnRight90(){
+ // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 1 );
+
+  
+  const group = new THREE.Group();
+  zLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  // const target = Math.PI / 2;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      // const delta = Math.min(speed, target - angle);
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.z += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      zLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+
+};
+
+
+function  rotateZMiddleColumnRight90(){
+ // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 0 );
+
+  
+  const group = new THREE.Group();
+  zLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  // const target = Math.PI / 2;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      // const delta = Math.min(speed, target - angle);
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.z += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      zLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+};
+
+
+
+function  rotateZBackColumnRight90(){
+   // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == -1 );
+
+  
+  const group = new THREE.Group();
+  zLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  // const target = Math.PI / 2;
+  const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      // const delta = Math.min(speed, target - angle);
+      const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.z += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      zLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+
+};
+
+
+
+function  rotateZFrontColumnLeft90(){
+ // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 1 );
+
+  
+  const group = new THREE.Group();
+  zLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  // const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.min(speed, target - angle);
+      // const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.z += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      zLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+};
+
+
+function  rotateZMiddleColumnLeft90(){
+ // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == 0 );
+
+  
+  const group = new THREE.Group();
+  zLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  // const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.min(speed, target - angle);
+      // const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.z += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      zLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+};
+
+
+
+function  rotateZBackColumnLeft90(){
+ // const topLayerCubes = Object.values(cubesMap).filter(cube => Math.abs(cube.userData.pos.y - 1) < 0.01);
+  const zLayerCubes = Object.values(cubesMap).filter(cube => cube.userData.pos.z == -1 );
+
+  
+  const group = new THREE.Group();
+  zLayerCubes.forEach(cube => {
+    rubiksCube.remove(cube);
+    group.add(cube);
+  });
+  rubiksCube.add(group);
+
+  let angle = 0;
+  const target = Math.PI / 2;
+  // const target = -Math.PI / 2;
+  const speed = 0.05;
+
+  function animateRotation() {
+    if (Math.abs(angle) < Math.abs(target)) {
+      const delta = Math.min(speed, target - angle);
+      // const delta = Math.sign(target) * Math.min(speed, Math.abs(target - angle));
+      
+      group.rotation.z += delta;
+      angle += delta;
+      requestAnimationFrame(animateRotation);
+    } else {
+      // Une fois la rotation terminée :
+      zLayerCubes.forEach(cube => {
+        cube.applyMatrix4(group.matrix);
+        cube.userData.pos = {
+          x: Math.round(cube.position.x),
+          y: Math.round(cube.position.y),
+          z: Math.round(cube.position.z),
+        };
+        rubiksCube.add(cube);
+        const key = `${cube.userData.pos.x},${cube.userData.pos.y},${cube.userData.pos.z}`;
+        cubesMap[key] = cube;
+      });
+      rubiksCube.remove(group);
+    }
+  }
+
+  animateRotation();
+};
+
+
+const shuffles=[
+  rotateTopLayerRight90,
+  rotateMiddleLayerRight90,
+  rotateDownLayerRight90,
+  rotateTopLayerLeft90,
+  rotateMiddleLayerLeft90,
+  rotateDownLayerLeft90,
+  rotateXLeftcolumnUp90,
+  rotateXMiddlecolumnUp90,
+  rotateXRightcolumnUp90,
+  rotateXLeftcolumnDown90,
+  rotateXMiddlecolumnDown90,
+  rotateXRightcolumnDown90,
+  rotateZFrontColumnRight90,
+  rotateZMiddleColumnRight90,
+  rotateZBackColumnRight90,
+  rotateZFrontColumnLeft90,
+  rotateZMiddleColumnLeft90,
+  rotateZBackColumnLeft90,
+]
+
+ 
+function randomSchuffle(){
+  for (let i = 0; i < 50; i++) {
+    setTimeout(() => {
+      console.log("Shuffle", i);
+      let index = Math.floor(Math.random() * shuffles.length);
+      const shuffle = shuffles[index];
+      shuffle();
+    }, i * 1000); // décalage de 1 seconde entre chaque appel
+  }
+}
+
+
+  
+
+
+
+  
